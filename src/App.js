@@ -5,6 +5,7 @@ function App() {
   const [userText, setUserText] = useState('')
   const [result, setResult] = useState(false)
   const [data, setData] = useState([])
+  const [filter, setFilter] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -23,29 +24,7 @@ function App() {
     setData([])
   }
   const handleHighlight = (arg) => {
-    document.querySelectorAll('.el').forEach(el => {
-      el.style.backgroundColor = ''
-    })
-    if (arg === 'unique') {
-      document.querySelectorAll('.unique').forEach(el => {
-        el.style.backgroundColor = '#ff9494'
-      })
-    }
-    if (arg === 'spam') {
-      document.querySelectorAll('.spam').forEach(el => {
-        el.style.backgroundColor = '#6666ff'
-      })
-    }
-    if (arg === 'stop') {
-      document.querySelectorAll('.stop').forEach(el => {
-        el.style.backgroundColor = '#9de0b5'
-      })
-    }
-    if (arg === 'error') {
-      document.querySelectorAll('.error').forEach(el => {
-        el.style.backgroundColor = '#ffff66'
-      })
-    }
+    setFilter(arg)
   }
 
   return (
@@ -55,19 +34,19 @@ function App() {
           ? (
             <div className="control-block">
               <div className="control-block__item" onClick={() => handleHighlight('unique')}>
-                <span className="control-block__item__round red"></span> <span
+                <span className="control-block__item__round red"/> <span
                 className="control-block__item__text">Уникальность</span>
               </div>
               <div className="control-block__item" onClick={() => handleHighlight('spam')}>
-                <span className="control-block__item__round blue"></span> <span
+                <span className="control-block__item__round blue"/> <span
                 className="control-block__item__text">Заспамленность</span>
               </div>
               <div className="control-block__item" onClick={() => handleHighlight('stop')}>
-                <span className="control-block__item__round green"></span> <span
+                <span className="control-block__item__round green"/> <span
                 className="control-block__item__text">Стоп-слова</span>
               </div>
               <div className="control-block__item" onClick={() => handleHighlight('error')}>
-                <span className="control-block__item__round yellow"></span> <span
+                <span className="control-block__item__round yellow"/> <span
                 className="control-block__item__text">Ошибки</span>
               </div>
             </div>
@@ -75,31 +54,27 @@ function App() {
           : null
         }
         <div
-          id="textarea"
           className="textarea"
-          contentEditable={result ? 'false' : 'true'}
+          contentEditable={!result}
           suppressContentEditableWarning={true}
         >
           {!result ? userText
             : data.map((el, index)=> {
               let className = "el"
 
-              if (el.spam) {
+              if (el.spam && filter === 'spam') {
                 className += ' spam'
               }
-              if (el.unique) {
+              if (el.unique && filter === 'unique') {
                 className += ' unique'
               }
-              if (el.stop) {
+              if (el.stop && filter === 'stop') {
                 className += ' stop'
               }
-              if (el.error) {
+              if (el.error && filter === 'error') {
                 className += ' error'
               }
-              return <span
-              className={className}
-              key={index}>{
-                el.word} </span>
+              return <span className={className} key={index}>{el.word}</span>
             })
           }
         </div>
