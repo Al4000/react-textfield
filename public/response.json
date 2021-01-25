@@ -1,0 +1,22 @@
+[
+	{
+		"word": "Lorem",
+		"spam": 10,
+		"unique": 15
+	},
+	{
+		"word": "ipsum",
+		"error": 10,
+		"unique": 25
+	},
+	{
+		"word": "dolor",
+		"spam": 10,
+		"error": 25
+	},
+	{
+		"word": "amet",
+		"error": 10,
+		"stop": 25
+	}
+]
