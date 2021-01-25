@@ -23,7 +23,9 @@ code {
   border-radius: 7px;
   border: 1px solid #ccc;
   margin: 0 auto 24px;
-  height: 200px;
+  min-height: 200px;
+  max-height: 800px;
+  overflow-y: scroll;
   box-sizing: border-box;
   padding: 8px 12px;
   text-align: left;
